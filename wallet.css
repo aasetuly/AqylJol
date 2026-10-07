@@ -1,0 +1,59 @@
+.aqw-chip{display:inline-flex;align-items:center;gap:6px;margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 13px;font-weight:600;font-size:13px;line-height:1;font-family:inherit;cursor:pointer;white-space:nowrap}
+.aqw-chip:hover{border-color:var(--teal)}
+.aqw-chip.aqw-float{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:10px;z-index:900}
+.aqw-geo{position:fixed;right:14px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:900;width:52px;height:52px;border-radius:50%;border:0;background:var(--teal-strong);color:#fff;box-shadow:0 6px 20px #0003;cursor:pointer;display:grid;place-items:center}
+.aqw-geo svg{width:24px;height:24px}
+@media(min-width:900px){.aqw-geo{bottom:24px;right:24px}}
+.aqw-back{position:fixed;inset:0;z-index:3000;background:#0008;display:flex;align-items:flex-end;justify-content:center}
+.aqw-sheet{background:var(--card);color:var(--ink);width:min(480px,100%);max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 30px #0003}
+@media(min-width:700px){.aqw-back{align-items:center}.aqw-sheet{border-radius:22px}}
+.aqw-sheet h2{margin:0 0 4px;font-size:20px}
+.aqw-sheet p{margin:6px 0;color:var(--muted);font-size:14px}
+.aqw-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.aqw-x{border:0;background:var(--surface);color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+.aqw-bal{background:linear-gradient(110deg,#0874b9,#009eac);color:#fff;border-radius:18px;padding:18px;margin:12px 0}
+.aqw-bal small{opacity:.85}.aqw-bal b{display:block;font-size:34px;margin-top:4px}
+.aqw-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.aqw-btn{flex:1;min-width:120px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:12px 14px;font-weight:600;font-size:14px;font-family:inherit;cursor:pointer}
+.aqw-btn.main{background:var(--teal-strong);border-color:var(--teal-strong);color:#fff}
+.aqw-btn[disabled]{opacity:.5;cursor:not-allowed}
+.aqw-in{width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);border-radius:12px;padding:12px;font:inherit;margin:6px 0}
+.aqw-list{list-style:none;margin:8px 0;padding:0}
+.aqw-list li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.aqw-list small{display:block;color:var(--muted)}
+.aqw-plus{color:#087d69;font-weight:700}.aqw-minus{color:#c0392b;font-weight:700}
+.aqw-video{width:100%;aspect-ratio:1;object-fit:cover;background:#000;border-radius:16px}
+.aqw-note{font-size:12px;color:var(--muted);margin-top:10px}
+.aqw-err{color:#c0392b}
+
+/* Шапка: выбор города — справа, рядом с кошельком и входом, не поверх текста */
+#header{gap:10px}
+#header .header-note{margin-right:12px;min-width:0}
+#header .citylabel{margin-left:auto;flex:0 0 auto}
+#header .aqw-chip{margin-left:0;flex:0 0 auto}
+#header .au-slot{margin-left:0!important;flex:0 0 auto}
+@media(max-width:560px){
+ #header{gap:6px}
+ #header .brand{min-width:0;flex:1 1 auto;overflow:hidden}
+ #header .citylabel select{max-width:96px;text-overflow:ellipsis}
+ .aqw-chip{padding:7px 10px;font-size:12px;gap:4px}
+ .aqw-chip svg{width:15px;height:15px}
+ #header .au-btn .au-label{display:none}
+}
+@media(max-width:560px){
+ #header .brand{overflow:visible;flex:0 0 auto}
+ #header .brand small{display:none}
+ .aqw-chip.aqw-guest .aqw-t{display:none}
+ .aqw-chip.aqw-guest{padding:8px 10px}
+}
+@media(max-width:899px){.aqw-geo{bottom:calc(150px + env(safe-area-inset-bottom,0px))}}
+
+/* NFC-оплата (демо) */
+.aqw-nfc{position:relative;width:132px;height:132px;margin:14px auto 6px;border-radius:50%;background:linear-gradient(135deg,#0874b9,#009eac);display:grid;place-items:center;color:#fff;font-size:48px}
+.aqw-wave{position:absolute;inset:0;border-radius:50%;border:2px solid #009eac;opacity:0}
+.aqw-nfc.on .aqw-wave{animation:aqw-pulse 1.2s ease-out infinite}
+.aqw-nfc.on .w2{animation-delay:.5s}
+@keyframes aqw-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+.aqw-ok{width:76px;height:76px;margin:10px auto;border-radius:50%;background:#087d69;color:#fff;font-size:44px;display:grid;place-items:center;animation:aqw-pop .35s ease-out}
+@keyframes aqw-pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.aqw-nfc.on .aqw-wave,.aqw-ok{animation:none}}

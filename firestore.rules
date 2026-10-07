@@ -1,0 +1,69 @@
+rules_version = '2';
+// AqylJol — правила Firestore. Вставьте в Firebase Console → Firestore Database → Rules → Publish.
+// Главный админ задаётся почтой в OWNER_EMAIL (должна совпадать с OWNERS в fleet.js).
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function OWNER_EMAIL() { return 'aasetuly25@apec.edu.kz'; }
+    function signed() { return request.auth != null && request.auth.token.email_verified == true; }
+    function me() { return get(/databases/$(db)/documents/db_roles/$(request.auth.uid)).data; }
+    function hasRole() { return exists(/databases/$(db)/documents/db_roles/$(request.auth.uid)); }
+    function role() { return hasRole() ? me().role : 'user'; }
+    function blocked() { return hasRole() && me().get('blocked', false) == true; }
+    function ok() { return signed() && !blocked(); }
+    function isOwner() { return ok() && role() == 'owner'; }
+    function isAdmin() { return ok() && role() == 'admin'; }
+    function myCity() { return me().get('city', ''); }
+    function bootOwner() { return signed() && request.auth.token.email == OWNER_EMAIL(); }
+    function targetRole(id) { return get(/databases/$(db)/documents/db_roles/$(id)).data.get('role', 'user'); }
+
+    // аккаунты и «люди»: свою запись пишет и читает сам человек; админ города — свой город; главный — всё
+    match /db_users/{id} {
+      allow read: if ok() && (request.auth.uid == id || isOwner() || (isAdmin() && resource.data.city == myCity()));
+      allow create, update: if ok() && request.auth.uid == id && request.resource.data.id == id;
+    }
+    match /db_people/{id} {
+      allow read: if ok() && (request.auth.uid == id || isOwner() || (isAdmin() && resource.data.city == myCity()));
+      allow create, update: if ok() && request.auth.uid == id;
+    }
+
+    // роли: читать свою; админ города видит роли (чтобы назначать водителей); писать — только админы по правилам
+    match /db_roles/{id} {
+      allow read: if ok() && (request.auth.uid == id || isOwner() || isAdmin());
+      allow create, update: if isOwner()
+        || (bootOwner() && request.auth.uid == id && request.resource.data.role == 'owner')
+        || (isAdmin() && request.auth.uid != id
+            && request.resource.data.get('city', '') == myCity()
+            && request.resource.data.role in ['user', 'driver', 'admin']
+            && (!exists(/databases/$(db)/documents/db_roles/$(id)) || targetRole(id) in ['user', 'driver']));
+      allow delete: if isOwner();
+    }
+
+    // обращения в поддержку
+    match /db_tickets/{id} {
+      allow read: if ok() && (resource.data.uid == request.auth.uid || isOwner() || (isAdmin() && resource.data.city == myCity()));
+      allow create: if ok() && request.resource.data.uid == request.auth.uid;
+      allow update: if isOwner() || (isAdmin() && resource.data.city == myCity());
+    }
+
+    // кошелёк и история поездок/оплат — только владелец
+    match /db_wallets/{id} {
+      allow read, write: if ok() && request.auth.uid == id;
+    }
+
+    // расписание и статусы автобусов: читают все вошедшие
+    match /db_sched/{id} {
+      allow read: if ok();
+      allow write: if isOwner() || isAdmin();
+    }
+    match /db_status/{id} {
+      allow read: if ok();
+      allow write: if ok() && role() in ['driver', 'admin', 'owner'];
+    }
+
+    // журнал действий
+    match /db_log/{id} {
+      allow read: if isOwner() || (isAdmin() && resource.data.city == myCity());
+      allow create: if ok() && role() in ['driver', 'admin', 'owner'] || bootOwner();
+    }
+  }
+}

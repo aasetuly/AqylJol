@@ -1,0 +1,18 @@
+/* Заставка: логотип → полоска заполняется → слоган плавно проявляется */
+html.splash-on{overflow:hidden}
+#splash{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:var(--bg,#eef3ee);color:var(--ink,#122120);cursor:pointer;transition:opacity .6s ease,visibility .6s}
+#splash.sp-out{opacity:0;visibility:hidden}
+.sp-box{display:flex;flex-direction:column;align-items:center;padding:24px;text-align:center}
+.sp-logo{width:132px;height:auto;border-radius:30px;box-shadow:0 18px 44px var(--shadow,#0c221e1f);opacity:0;transform:scale(.86);animation:sp-logo .8s cubic-bezier(.2,.8,.2,1) .15s forwards}
+.sp-bar{width:min(220px,60vw);height:4px;margin-top:30px;border-radius:4px;background:var(--line,#d9e3dd);overflow:hidden;opacity:0;animation:sp-fade .3s ease .7s forwards}
+.sp-bar i{display:block;height:100%;width:100%;border-radius:4px;background:linear-gradient(90deg,#0869b0,#08bbaa);transform:scaleX(0);transform-origin:left;animation:sp-fill 1.5s cubic-bezier(.45,.05,.25,1) .9s forwards}
+.sp-tag{margin:26px 0 0;font:700 clamp(22px,5.5vw,30px)/1.2 var(--display,'Oswald',Arial,sans-serif);letter-spacing:.5px}
+.sp-tag span{display:inline-block;opacity:0;transform:translateY(6px);filter:blur(4px);animation:sp-word .9s ease forwards}
+.sp-tag span:nth-child(1){animation-delay:2.5s}
+.sp-tag span:nth-child(2){animation-delay:2.8s}
+.sp-tag span:nth-child(3){animation-delay:3.1s;color:var(--teal,#00747a)}
+@keyframes sp-logo{to{opacity:1;transform:none}}
+@keyframes sp-fade{to{opacity:1}}
+@keyframes sp-fill{to{transform:scaleX(1)}}
+@keyframes sp-word{to{opacity:1;transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){.sp-logo,.sp-bar,.sp-bar i,.sp-tag span{animation-duration:.01s;animation-delay:0s}.sp-bar i{transform:none}}

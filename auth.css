@@ -1,0 +1,61 @@
+/* AqylJol — окно авторизации */
+.au-btn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--ink);font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.au-btn:hover{border-color:var(--teal)}
+.au-btn .icon{width:18px;height:18px}
+.au-avatar{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:linear-gradient(130deg,#0869b0,#08bbaa);color:#fff;font-size:12px;font-weight:800}
+.au-slot{display:flex;align-items:center;margin-left:12px}
+.au-back{position:fixed;inset:0;z-index:99999;background:#06142899;backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;overflow-y:auto}
+.au-back[hidden]{display:none}
+.au-modal{position:relative;width:min(420px,100%);background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:28px 26px 24px;box-shadow:0 24px 70px #06142866;max-height:calc(100vh - 32px);overflow-y:auto}
+.au-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:10px;background:var(--surface);color:var(--muted);font-size:20px;cursor:pointer}
+.au-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:800;font-size:20px}
+.au-logo img{width:34px;height:36px}
+.au-logo b{color:var(--teal-strong)}
+.au-modal h2{margin:0 0 4px;font-size:22px;letter-spacing:-.5px}
+.au-sub{margin:0 0 18px;font-size:13px;color:var(--muted);line-height:1.5}
+.au-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.au-google:hover{border-color:var(--teal)}
+.au-google svg{width:20px;height:20px}
+.au-gslot{display:flex;justify-content:center;min-height:0}
+.au-or{display:flex;align-items:center;gap:12px;margin:16px 0;font-size:11px;color:var(--muted);letter-spacing:1px}
+.au-or:before,.au-or:after{content:'';flex:1;height:1px;background:var(--line)}
+.au-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--surface);border-radius:12px;margin-bottom:16px}
+.au-tab{min-height:38px;border:0;border-radius:9px;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.au-tab[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 2px 8px var(--shadow)}
+.au-field{display:block;margin-bottom:12px;font-size:12px;font-weight:700;color:var(--muted)}
+.au-field input{display:block;width:100%;box-sizing:border-box;margin-top:6px;min-height:48px;padding:0 14px;border:1px solid var(--line);border-radius:11px;background:var(--input-bg);color:var(--ink);font:inherit;font-size:15px;font-weight:500}
+.au-field input:focus{outline:2px solid var(--teal);outline-offset:1px}
+.au-pass{position:relative}
+.au-pass input{padding-right:70px}
+.au-eye{position:absolute;right:6px;bottom:6px;height:36px;padding:0 10px;border:0;border-radius:8px;background:transparent;color:var(--teal-strong);font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.au-submit{width:100%;min-height:50px;margin-top:6px;border:0;border-radius:12px;background:linear-gradient(100deg,#0874b9,#009eac);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.au-submit:disabled{opacity:.6;cursor:wait}
+.au-err{min-height:18px;margin:2px 0 8px;font-size:12px;line-height:1.4;color:#d6304a}
+:root[data-theme="dark"] .au-err{color:#ff8a9b}
+.au-demo{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--badge-bg);color:var(--badge-ink);font-size:12px;line-height:1.5}
+.au-link{display:block;margin:12px auto 0;border:0;background:none;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
+.au-switch{margin-top:14px;text-align:center;font-size:12px;color:var(--muted)}
+.au-switch button{border:0;background:none;color:var(--teal-strong);font:inherit;font-weight:800;cursor:pointer}
+.au-profile{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.au-profile .au-avatar{width:54px;height:54px;font-size:22px}
+.au-profile strong{display:block;font-size:16px}
+.au-profile span{font-size:12px;color:var(--muted)}
+.au-card{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.au-card .au-profile{margin:0}
+@media(max-width:560px){.au-btn .au-label{display:none}.au-btn{padding:0 11px}.au-slot{margin-left:8px}.au-modal{padding:24px 18px 20px;border-radius:18px}}
+@media(prefers-reduced-motion:no-preference){.au-modal{animation:au-in .22s ease-out}@keyframes au-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}}
+
+/* Личный кабинет */
+.au-h3{margin:20px 0 10px;font-size:13px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted)}
+.au-cats{display:flex;flex-wrap:wrap;gap:8px}
+.au-cat{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.au-cat:hover{border-color:var(--teal)}
+.au-cat.on{background:linear-gradient(100deg,#0874b9,#009eac);border-color:transparent;color:#fff}
+.au-phone{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:0 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);text-decoration:none;font-size:13px}
+.au-phone b{font-size:15px;color:var(--teal-strong);white-space:nowrap}
+:root[data-theme="dark"] .au-phone b{color:var(--teal)}
+.au-docs{margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.7}
+.au-addr{margin:0 0 16px;padding:12px 14px;border:1px dashed var(--line);border-radius:12px;font-size:13px}
+.au-addr span{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
+.au-backlink{margin:0 0 10px;text-align:left;text-decoration:none;color:var(--teal-strong)}
+.au-out{display:block;width:100%;min-height:44px;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;cursor:pointer}

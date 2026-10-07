@@ -1,0 +1,106 @@
+/* AqylJol — кабинет водителя, администрирование, ночной режим */
+.fl{display:grid;gap:14px;max-width:760px}
+.fl-card{display:grid;gap:12px;padding:18px}
+.fl-card h2{margin:0;font-size:20px}
+.fl-card .muted{margin:0}
+.fl-wide{width:100%;justify-content:center;text-align:center}
+.fl-note{margin:0;font-size:12.5px;color:var(--muted)}
+.fl-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.fl-group{display:grid;gap:8px}
+.fl-chips{display:flex;flex-wrap:wrap;gap:8px}
+.fl-field{display:grid;gap:6px;font-weight:600;font-size:14px}
+.fl-field input{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--input-bg);color:var(--ink);font:inherit}
+
+/* кнопки */
+.fl-btn{border:1px solid var(--line);background:var(--chip-bg,var(--card));color:var(--ink);padding:9px 14px;border-radius:12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:transform .12s,background .12s}
+.fl-btn:hover:not(:disabled){transform:translateY(-1px);border-color:var(--teal)}
+.fl-btn:disabled{opacity:.45;cursor:not-allowed}
+.fl-btn.fl-primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.fl-btn.fl-danger{color:var(--coral);border-color:color-mix(in srgb,var(--coral) 45%,var(--line))}
+.fl-end{justify-self:start}
+
+/* кабинет водителя */
+.fl-bushead{display:flex;align-items:center;gap:12px}
+.fl-bushead>div{display:grid;gap:4px;min-width:0}
+.fl-bushead .route-number{flex:none}
+.fl-status{display:grid;gap:2px;padding:16px 18px;border-radius:16px;border:2px solid var(--line);background:var(--surface)}
+.fl-status b{font-size:22px;font-family:var(--display)}
+.fl-status small{color:var(--muted);font-size:13px;min-height:1em}
+.fl-status-go{border-color:#1f9e7c;background:color-mix(in srgb,#1f9e7c 14%,var(--card))}
+.fl-status-stop{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 18%,var(--card))}
+.fl-status-off{border-color:var(--coral);background:color-mix(in srgb,var(--coral) 12%,var(--card))}
+.fl-window{margin:0;font-size:14px;color:var(--muted)}
+.fl-warn{padding:12px 14px;border-radius:12px;background:var(--notice-bg,#fff3dc);color:var(--notice-ink,#7a5a1f);border:1px solid var(--notice-line,#ecdcb2);font-size:14px}
+.fl-bigbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fl-big{display:grid;justify-items:center;gap:6px;padding:22px 10px;border:0;border-radius:20px;font:inherit;font-size:19px;font-weight:800;color:#fff;cursor:pointer;min-height:118px;transition:transform .12s,filter .12s}
+.fl-big span{font-size:30px;line-height:1}
+.fl-big:active:not(:disabled){transform:scale(.97)}
+.fl-big:disabled{opacity:.4;cursor:not-allowed}
+.fl-go{background:#1f9e7c}
+.fl-stop{background:#d98a14}
+
+/* журнал */
+.fl-log{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.fl-log li{display:grid;grid-template-columns:auto 1fr;gap:12px;font-size:14px;padding:8px 0;border-bottom:1px solid var(--line)}
+.fl-log time{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12.5px;padding-top:1px}
+
+/* администрирование */
+.fl-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.fl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.fl-stats div{display:grid;gap:2px;padding:10px;border-radius:12px;background:var(--surface);text-align:center}
+.fl-stats b{font-size:22px;font-family:var(--display)}
+.fl-stats span{font-size:11.5px;color:var(--muted)}
+.fl-people{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fl-person{display:grid;grid-template-columns:auto 1fr;gap:10px 12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.fl-person.is-blocked{opacity:.78;border-color:color-mix(in srgb,var(--coral) 50%,var(--line))}
+.fl-ava{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:#fff;font-weight:800;font-size:14px}
+.fl-pinfo{display:grid;gap:3px;min-width:0}
+.fl-pinfo strong{overflow-wrap:anywhere}
+.fl-pinfo em{font-style:normal;color:var(--muted);font-weight:500}
+.fl-pinfo>span:not(.fl-role){font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.fl-role{justify-self:start;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--badge-bg);color:var(--badge-ink)}
+.fl-role-driver{background:color-mix(in srgb,#1f9e7c 20%,var(--card));color:#17795f}
+.fl-role-admin{background:color-mix(in srgb,#6150a5 20%,var(--card));color:#5a49a0}
+.fl-role-blocked{background:color-mix(in srgb,var(--coral) 18%,var(--card));color:var(--coral)}
+:root[data-theme="dark"] .fl-role-driver{color:#6bd9ad}
+:root[data-theme="dark"] .fl-role-admin{color:#b9acf5}
+.fl-pact{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fl-pact select,.fl-sched input,.fl-sched select,.fl-clockrow input{padding:9px 10px;border:1px solid var(--line);border-radius:12px;background:var(--input-bg);color:var(--ink);font:inherit;font-size:14px;max-width:100%}
+.fl-sched{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fl-sched label{display:grid;gap:5px;font-size:12px;font-weight:700;color:var(--muted)}
+.fl-drivers{margin:0;font-size:14px}
+.fl-row,.fl-clockrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* пассажирская часть */
+.fl-pill{display:inline-flex;align-items:center;gap:6px;width:fit-content;max-width:100%;padding:4px 11px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--badge-bg);color:var(--badge-ink)}
+.fl-pill-off{background:color-mix(in srgb,var(--coral) 16%,var(--card));color:var(--coral)}
+.fl-pill-stop{background:color-mix(in srgb,var(--amber) 22%,var(--card));color:#8a5d0b}
+:root[data-theme="dark"] .fl-pill-stop{color:var(--amber)}
+.fl-pill-go{background:color-mix(in srgb,#1f9e7c 18%,var(--card));color:#17795f}
+:root[data-theme="dark"] .fl-pill-go{color:#6bd9ad}
+.fl-badge{padding:2px 0 6px}
+.buscard.fl-off{opacity:.7}
+.buscard.fl-off .eta{opacity:.35}
+.fl-night{margin:0 0 14px;padding:12px 16px;border-radius:14px;background:#0f2540;color:#d8e6fb;font-size:14px;line-height:1.45;border:1px solid #1d3d66}
+.bus-pin.fl-stopped .mapmarker{filter:grayscale(.85);outline:3px solid var(--amber);outline-offset:2px;border-radius:14px}
+
+@media (max-width:560px){
+ .fl-sched{grid-template-columns:1fr 1fr}
+ .fl-sched label:last-child{grid-column:1/-1}
+ .fl-stats{grid-template-columns:repeat(2,1fr)}
+ .fl-big{min-height:104px;font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){.fl-btn,.fl-big{transition:none}}
+
+/* значок новых обращений в меню */
+.fl-nb{display:inline-grid;place-items:center;min-width:16px;height:16px;padding:0 4px;margin-left:4px;border-radius:99px;background:var(--coral,#e5484d);color:#fff;font-size:10px;font-weight:800;line-height:1}
+
+/* техподдержка */
+.fl-textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--input-bg);color:var(--ink);font:inherit;resize:vertical;box-sizing:border-box}
+.fl-tickets{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fl-ticket{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:14px}
+.fl-ticket.fl-tk-new{border-color:var(--teal)}
+.fl-tkhead{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.fl-tktext,.fl-tkreply{margin:0;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.fl-tkreply{color:var(--muted)}
+.fl-tkin{flex:1 1 180px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--input-bg);color:var(--ink);font:inherit}
