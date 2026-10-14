@@ -1,0 +1,168 @@
+/* AqylJol v12 — стили новых возможностей и аккуратная «полировка» интерфейса.
+   Ничего не меняет в раскладке и логике: только плавность, глубина, фокус и новые блоки. */
+
+/* ---------- Общая полировка ---------- */
+:root{--aq-grad:linear-gradient(105deg,#0874b9,#009eac);--aq-ring:0 0 0 3px #009eaa40;--aq-ease:cubic-bezier(.22,.7,.2,1)}
+::selection{background:#009eaa33}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:8px}
+button,.chip,.card,.buscard,.quick,a{transition:transform .18s var(--aq-ease),box-shadow .2s var(--aq-ease),border-color .2s,background-color .2s,color .2s,opacity .2s}
+.card,.buscard{border-color:color-mix(in srgb,var(--line) 80%,var(--teal) 20%);box-shadow:0 1px 2px #10305008,0 10px 30px #10305010}
+.buscard:hover,.quick:hover{transform:translateY(-3px);box-shadow:0 2px 4px #1030500a,0 18px 40px #10305020;border-color:color-mix(in srgb,var(--line) 40%,var(--teal) 60%)}
+.chip:hover:not(.active){border-color:var(--teal);transform:translateY(-1px)}
+.chip.active{background:var(--aq-grad);border-color:transparent;color:#fff;box-shadow:0 6px 16px #0874b933}
+button.primary,a.primary,.primary{box-shadow:0 6px 18px #00cfa633}
+button.primary:hover,a.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px #00cfa64d}
+button:active,.chip:active,.aq-qr:active{transform:scale(.97)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)!important;box-shadow:var(--aq-ring)}
+.eyebrow{background:var(--aq-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.pageheading h1{background:linear-gradient(100deg,var(--ink) 55%,var(--teal-strong));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero{box-shadow:0 20px 50px #0874b926}
+.nav a{transition:background-color .2s,color .2s,transform .18s var(--aq-ease)}
+.nav a:hover:not(.active){transform:translateX(3px)}
+@media(max-width:1000px){.nav a:hover:not(.active){transform:none}}
+.shell>*,#app>*{animation:aq-rise .45s var(--aq-ease) both}
+.shell>*:nth-child(2),#app>*:nth-child(2){animation-delay:.04s}
+.shell>*:nth-child(3),#app>*:nth-child(3){animation-delay:.08s}
+.shell>*:nth-child(n+4),#app>*:nth-child(n+4){animation-delay:.12s}
+@keyframes aq-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.toast{backdrop-filter:blur(8px)}
+@media(prefers-reduced-motion:reduce){.shell>*,#app>*{animation:none}.buscard:hover,.quick:hover{transform:none}html{scroll-behavior:auto}}
+
+/* ---------- Кнопка QR на каждой странице ---------- */
+.aq-qr{position:fixed;right:14px;bottom:var(--aq-qr-b,calc(86px + env(safe-area-inset-bottom,0px)));z-index:900;display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;border:0;border-radius:999px;background:var(--aq-grad);color:#fff;font:inherit;font-weight:800;font-size:15px;letter-spacing:.5px;cursor:pointer;box-shadow:0 10px 26px #0874b966,0 0 0 4px #ffffff22 inset}
+.aq-qr svg{width:24px;height:24px}
+.aq-qr:hover{transform:translateY(-2px);box-shadow:0 14px 30px #0874b980}
+.aq-qr::after{content:'';position:absolute;inset:-5px;border-radius:999px;border:2px solid #009eaa;opacity:0;animation:aq-pulse 2.8s ease-out infinite;pointer-events:none}
+@keyframes aq-pulse{0%{transform:scale(.96);opacity:.55}70%,100%{transform:scale(1.14);opacity:0}}
+@media(prefers-reduced-motion:reduce){.aq-qr::after{animation:none}}
+.aqw-geo{bottom:var(--aq-geo-b,calc(150px + env(safe-area-inset-bottom,0px)))!important}
+@media(min-width:900px){.aq-qr{bottom:var(--aq-qr-b,24px);right:24px}.aqw-geo{bottom:var(--aq-geo-b,92px)!important}}
+
+/* ---------- Окна и общие элементы ---------- */
+.aq-sheetback{z-index:3100}
+.aq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.aq-chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.aq-chip:hover{border-color:var(--teal)}
+.aq-plate-in{text-transform:uppercase;letter-spacing:2px;font-weight:700;text-align:center}
+.aq-found{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-left:5px solid var(--accent,var(--teal));border-radius:14px;background:var(--surface);margin:10px 0}
+.aq-found .route-number{flex:0 0 auto}
+.aq-found strong{display:block;font-size:15px}.aq-found small{color:var(--muted)}
+.aq-dist{margin:10px 0;padding:11px 14px;border-radius:12px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:600;line-height:1.5;border:1px solid var(--line)}
+.aq-dist.good{background:#e2f8f1;border-color:#0ea58a55;color:#07705f}
+.aq-dist.bad{background:#fff3e6;border-color:#f0a94a66;color:#9a5a00}
+:root[data-theme="dark"] .aq-dist.good{background:#103d38;color:#7fe7c9}
+:root[data-theme="dark"] .aq-dist.bad{background:#40300f;color:#ffd08a}
+.aq-plate{display:inline-flex;align-items:center;padding:2px 8px;border:1.5px solid var(--ink);border-radius:6px;font-size:10px;font-weight:800;letter-spacing:1px;background:var(--card);color:var(--ink);white-space:nowrap}
+.aq-testbanner{margin:10px 0;padding:11px 14px;border-radius:12px;background:#fff3e6;border:1px dashed #e08a1e;color:#8a4b00;font-size:13px;font-weight:600;line-height:1.5}
+:root[data-theme="dark"] .aq-testbanner{background:#40300f;color:#ffd08a;border-color:#c9841c}
+.aq-check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer}
+.aq-check input{margin-top:2px;width:18px;height:18px;accent-color:var(--teal-strong);flex:0 0 auto}
+.aq-file{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;margin:8px 0;padding:10px 12px;border:1.5px dashed var(--line);border-radius:12px;font-size:13px;cursor:pointer}
+.aq-file:hover{border-color:var(--teal)}
+.aq-file.ok{border-style:solid;border-color:#0ea58a;background:#e2f8f122}
+.aq-file span{font-weight:600}.aq-file em{grid-column:1;font-style:normal;font-size:11px;color:var(--muted)}
+.aq-file input{grid-column:2;grid-row:1/3;max-width:130px;font-size:11px}
+.aq-qrbox{display:grid;place-items:center;min-height:216px;padding:8px;background:#fff;border-radius:16px;margin:10px 0}
+
+/* ---------- Баннеры «рядом с автобусом» и автооплаты ---------- */
+#aq-prox-stack{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3200;display:flex;flex-direction:column;gap:8px;width:min(460px,calc(100% - 20px))}
+.aq-prox{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:0 14px 40px #06142840;animation:aq-drop .35s var(--aq-ease)}
+.aq-prox.out{opacity:0;transform:translateY(-12px);transition:.25s}
+.aq-prox.auto{border-color:var(--teal)}
+@keyframes aq-drop{from{opacity:0;transform:translateY(-16px) scale(.97)}to{opacity:1;transform:none}}
+.aq-prox-num{flex:0 0 auto;display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--bus,var(--teal-strong));color:#fff;font-weight:800;font-size:16px}
+.aq-prox-body{flex:1;min-width:0}.aq-prox-body strong{display:block;font-size:14px}.aq-prox-body p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.aq-prox-pay{flex:0 0 auto;border:0;border-radius:10px;padding:10px 14px;background:var(--aq-grad);color:#fff;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.aq-prox-pay.aq-cancel{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.aq-prox-x{flex:0 0 auto;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 6px}
+
+/* ---------- Настройки ---------- */
+#aq-settings{display:contents}
+.aq-card{margin-top:16px;position:relative}
+.aq-card h2{margin:0 0 6px;font-size:19px}
+.aq-switchrow{display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+.aq-switchrow>div{flex:1;min-width:0}
+.aq-switch{position:relative;flex:0 0 auto;width:52px;height:30px;margin-top:2px;display:inline-block;cursor:pointer}
+.aq-switch input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer;z-index:1}
+.aq-switch span{position:absolute;inset:0;border-radius:999px;background:#b7c5d3;transition:background .2s}
+.aq-switch span::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px #0003;transition:transform .22s var(--aq-ease)}
+.aq-switch input:checked+span{background:var(--aq-grad)}
+.aq-switch input:checked+span::after{transform:translateX(22px)}
+.aq-switch input:focus-visible+span{box-shadow:var(--aq-ring)}
+.aq-offer{border:1.5px solid color-mix(in srgb,var(--teal) 55%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--teal) 8%,var(--card)),var(--card))}
+.aq-badge{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--aq-grad);color:#fff;font-size:10px;font-weight:800;letter-spacing:.8px;margin-bottom:8px}
+.aq-demo{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.aq-demo summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--teal-strong)}
+.aq-cardlist{display:grid;gap:12px;margin:10px 0}
+.aq-vcard{position:relative;border-radius:20px;padding:20px;color:#fff;background:linear-gradient(135deg,#0a3a66 0%,#0874b9 55%,#09b8a8 100%);box-shadow:0 14px 34px #0874b94d;overflow:hidden}
+.aq-vcard::after{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:#ffffff14}
+.aq-vtop{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:1.6px;opacity:.95}
+.aq-vnum{margin:22px 0 18px;font-size:22px;font-weight:700;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.aq-vbot{display:flex;gap:24px;flex-wrap:wrap}.aq-vbot small{display:block;font-size:9px;letter-spacing:1.2px;opacity:.75;text-transform:uppercase}.aq-vbot b{font-size:14px}
+.aq-vqr{position:absolute;right:16px;bottom:16px;z-index:1;border:1px solid #ffffff66;background:#ffffff26;color:#fff;border-radius:10px;padding:8px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(4px)}
+.aq-req{padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface)}
+.aq-req b{display:block}.aq-req span{font-size:12px;color:var(--muted)}.aq-req p{margin:6px 0 0;font-size:13px}
+.aq-req.new{border-color:#f0a94a88}.aq-req.rejected{border-color:#d9534f88}
+.aq-pcard,.aq-bankrow{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:8px 0}
+.aq-pcard>span,.aq-bankrow>span{font-size:24px}.aq-pcard div,.aq-bankrow div{flex:1;min-width:0}
+.aq-pcard small,.aq-bankrow small{display:block;color:var(--muted);font-size:12px}
+.aq-del{border:1px solid var(--line);background:var(--card);color:#c0392b;border-radius:10px;padding:7px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+
+/* ---------- Блок «Найди нас в соцсетях» ---------- */
+.aq-social{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;background:linear-gradient(120deg,color-mix(in srgb,var(--teal) 10%,var(--card)),var(--card) 60%)}
+.aq-social h2{margin:0 0 4px;font-size:22px}.aq-social .muted{margin:0}
+.aq-soc-links{display:flex;gap:10px;flex-wrap:wrap}
+.aq-soc{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;min-width:0}
+.aq-soc svg{flex:0 0 auto;width:26px;height:26px;padding:6px;border-radius:9px;color:#fff;box-sizing:content-box}
+.aq-soc.ig svg{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}
+.aq-soc.tg svg{background:#229ed9}.aq-soc.ml svg{background:var(--aq-grad)}
+.aq-soc small{display:block;font-size:10px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase}.aq-soc b{font-size:13px;word-break:break-all}
+.aq-soc:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 10px 24px #10305018}
+@media(max-width:760px){.aq-social{grid-template-columns:1fr}.aq-soc{flex:1 1 100%}}
+
+/* ---------- Новости на странице «О нас» ---------- */
+.aq-news{margin:18px 0;border-left:5px solid var(--teal)}
+.aq-news-head h2{margin:0 0 12px}
+.aq-news-item h3{margin:6px 0;font-size:19px}
+.aq-news-item p{margin:0 0 10px;color:var(--muted);line-height:1.65}
+.aq-news-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.aq-news-meta .aq-badge{margin:0}.aq-news-meta time{font-size:12px;color:var(--muted)}
+.aq-news-item ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.aq-news-item li{position:relative;padding:9px 12px 9px 32px;border-radius:12px;background:var(--surface);font-size:13px;line-height:1.45}
+.aq-news-item li::before{content:'✓';position:absolute;left:11px;top:9px;color:var(--teal-strong);font-weight:800}
+
+/* ---------- Окно входа: имя и фамилия ---------- */
+.au-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.au-two .au-field{min-width:0}
+.au-alink{display:block;text-align:center;text-decoration:none;margin-top:10px}
+
+/* ---------- Диспетчерская и кабинет водителя ---------- */
+.fl-err{color:#c0392b;font-size:13px;font-weight:600;margin:8px 0 0;min-height:0}
+.fl-err:empty{display:none}
+.fl-urgent{border-color:#d9534f!important;color:#c0392b}
+.fl-docs{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.fl-docs figure{margin:0;width:128px}
+.fl-docs figcaption{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.3}
+.fl-doc{width:128px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
+.fl-zoom{position:fixed;inset:0;z-index:99999;background:#000c;display:grid;place-items:center;padding:20px;cursor:zoom-out}
+.fl-zoom img{max-width:100%;max-height:100%;border-radius:12px}
+
+/* ---------- Узоры на заднем фоне ----------
+   Тонкий орнамент в духе казахских «бараньих рогов» (қошқар мүйіз) + мягкие цветные пятна.
+   Лежит под всем содержимым и не мешает чтению. Отключить: удалите этот блок. */
+body{background:transparent}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:
+  radial-gradient(520px 380px at 8% 6%,#00b8a926,transparent 70%),
+  radial-gradient(620px 460px at 96% 38%,#0874b91f,transparent 70%),
+  radial-gradient(520px 420px at 30% 104%,#00cfa61c,transparent 70%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%230874b9' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M60 12c11 0 18 8 18 17s-8 14-14 11-5-10 0-10'/%3E%3Cpath d='M60 12C49 12 42 20 42 29s8 14 14 11 5-10 0-10'/%3E%3Cpath d='M60 108c11 0 18-8 18-17s-8-14-14-11-5 10 0 10'/%3E%3Cpath d='M60 108c-11 0-18-8-18-17s8-14 14-11 5 10 0 10'/%3E%3Cpath d='M12 60c0-11 8-18 17-18s14 8 11 14-10 5-10 0'/%3E%3Cpath d='M108 60c0-11-8-18-17-18s-14 8-11 14 10 5 10 0'/%3E%3Ccircle cx='60' cy='60' r='2.4'/%3E%3Cpath d='M0 0l6 6M120 0l-6 6M0 120l6-6M120 120l-6-6'/%3E%3C/svg%3E");
+ background-size:auto,auto,auto,120px 120px;
+ opacity:.2}
+:root[data-theme="dark"] body::before{opacity:.45;
+ background:
+  radial-gradient(520px 380px at 8% 6%,#00b8a922,transparent 70%),
+  radial-gradient(620px 460px at 96% 38%,#0874b933,transparent 70%),
+  radial-gradient(520px 420px at 30% 104%,#00cfa618,transparent 70%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%2300cfa6' stroke-opacity='.35' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M60 12c11 0 18 8 18 17s-8 14-14 11-5-10 0-10'/%3E%3Cpath d='M60 12C49 12 42 20 42 29s8 14 14 11 5-10 0-10'/%3E%3Cpath d='M60 108c11 0 18-8 18-17s-8-14-14-11-5 10 0 10'/%3E%3Cpath d='M60 108c-11 0-18-8-18-17s8-14 14-11 5 10 0 10'/%3E%3Cpath d='M12 60c0-11 8-18 17-18s14 8 11 14-10 5-10 0'/%3E%3Cpath d='M108 60c0-11-8-18-17-18s-14 8-11 14 10 5 10 0'/%3E%3Ccircle cx='60' cy='60' r='2.4'/%3E%3Cpath d='M0 0l6 6M120 0l-6 6M0 120l6-6M120 120l-6-6'/%3E%3C/svg%3E");
+ background-size:auto,auto,auto,120px 120px}
