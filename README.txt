@@ -11,3 +11,16 @@ if you download you are unable to connect database/open site
 + HTML
 + HTML CSS 
        ONLY LANGUAGES USED.
+
+UPDATE 21.10.26
+TESTING PROCESS...
+
+--------------------------------------------
+TESTING THE AI CAMERA.
+TESTING FUNCTIONALITY OF THE SITE
+TESTING DATABASE SAFETY
+GETTING DATA OF BUSSES
+- YUTONG - NISHETESU BUS
+
+--------------------------------------------
+TESTING DDOS ATTACK FILTER.
